@@ -129,7 +129,7 @@ func playerMove(available []bool) []bool {
 		fmt.Println("The field is unavailable. We will choose available field for you then.")
 		for i := 0; i < 9; i++ {
 			if available[i] {
-				changeXOboard(i, "O")
+				changeXOboard(i+1, "O")
 				available[i] = false
 			}
 		}
