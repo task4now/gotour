@@ -7,7 +7,6 @@ import (
 	"strconv"
 )
 
-
 func GetIntFromInput(intro string, seed int) int {
 	var number int
 
@@ -28,7 +27,6 @@ func GetIntFromInput(intro string, seed int) int {
 
 	return number
 }
-
 
 func GetStrFromInput(intro string, defaultValue string) string {
 	reader := bufio.NewReader(os.Stdin)

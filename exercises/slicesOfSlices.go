@@ -3,20 +3,20 @@ package main
 import "../goLang/pic"
 
 func Pic(dx, dy int) [][]uint8 {
-  	array := make([][]uint8, dy)
+	array := make([][]uint8, dy)
 
-  	for i := 0; i < dy; i++ {
-    	array[i] = make([]uint8, dx)
+	for i := 0; i < dy; i++ {
+		array[i] = make([]uint8, dx)
 
-    	for j := 0; j < dx; j++ {
-      		array[i][j] = uint8(i ^ j)
-    	}
+		for j := 0; j < dx; j++ {
+			array[i][j] = uint8(i ^ j)
+		}
 
-  	}
+	}
 
-  return array
+	return array
 }
 
 func main() {
-  pic.Show(Pic)
+	pic.Show(Pic)
 }

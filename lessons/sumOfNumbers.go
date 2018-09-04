@@ -6,13 +6,13 @@ import (
 )
 
 func main() {
-  	sum := 0
+	sum := 0
 
-  	count := myPackage.GetIntFromInput("Input final number: ", 100)
+	count := myPackage.GetIntFromInput("Input final number: ", 100)
 
-  	for i := 0; i <= count; i++ {
-    	sum += i
-  	}
+	for i := 0; i <= count; i++ {
+		sum += i
+	}
 
-  	fmt.Printf("Sum of numbers from zero to %d is %d.", count, sum)
+	fmt.Printf("Sum of numbers from zero to %d is %d.", count, sum)
 }

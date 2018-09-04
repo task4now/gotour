@@ -2,18 +2,18 @@ package main
 
 import (
 	"../myPackage"
-    "fmt"
+	"fmt"
 	"math"
 )
 
 func PythagorasSquareRoot(x float64) float64 {
-  	squareRoot := float64(1)
+	squareRoot := float64(1)
 
-  	for i := 1; i < int(x)+3; i++ {
-		squareRoot = 0.5 * (squareRoot + x / squareRoot)
-  	}
+	for i := 1; i < int(x)+3; i++ {
+		squareRoot = 0.5 * (squareRoot + x/squareRoot)
+	}
 
-  return squareRoot
+	return squareRoot
 }
 
 func main() {

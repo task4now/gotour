@@ -8,38 +8,37 @@ import (
 
 type NewGame struct {
 	available []bool
-	move bool
+	move      bool
 }
 
-var XOboard = [][]string {
+var XOboard = [][]string{
 	{"1", "2", "3"},
 	{"4", "5", "6"},
 	{"7", "8", "9"},
 }
 
 func main() {
-  game := NewGame{}
-  game.available = setPointers(game.available)
-  game.move = true
+	game := NewGame{}
+	game.available = setPointers(game.available)
+	game.move = true
 
-  for {
-  	drawBoard()
+	for {
+		drawBoard()
 
-  	if game.move {
-  		game.available = AImove(game.available)
-	} else {
-		game.available = playerMove(game.available)
+		if game.move {
+			game.available = AImove(game.available)
+		} else {
+			game.available = playerMove(game.available)
+		}
+
+		if endGame() {
+			finishGame(game.move)
+			break
+		}
+
+		game.move = !game.move
 	}
-
-  	if endGame() {
-  		finishGame(game.move)
-  		break
-	}
-
-  	game.move = !game.move
-  }
 }
-
 
 func AImove(available []bool) []bool {
 	move := strategyAI(available)
@@ -50,7 +49,6 @@ func AImove(available []bool) []bool {
 
 	return available
 }
-
 
 func changeXOboard(move int, typo string) {
 	switch move {
@@ -75,7 +73,6 @@ func changeXOboard(move int, typo string) {
 	}
 }
 
-
 func drawBoard() {
 	fmt.Println()
 
@@ -86,13 +83,12 @@ func drawBoard() {
 	fmt.Println()
 }
 
-
 func endGame() bool {
 	win :=
-	 		XOboard[0][0] == XOboard[0][1] && XOboard[0][0] == XOboard[0][2] ||
+		XOboard[0][0] == XOboard[0][1] && XOboard[0][0] == XOboard[0][2] ||
 			XOboard[1][0] == XOboard[1][1] && XOboard[1][0] == XOboard[1][2] ||
 			XOboard[2][0] == XOboard[2][1] && XOboard[2][0] == XOboard[2][2] ||
-	 		XOboard[0][0] == XOboard[1][0] && XOboard[0][0] == XOboard[2][0] ||
+			XOboard[0][0] == XOboard[1][0] && XOboard[0][0] == XOboard[2][0] ||
 			XOboard[0][1] == XOboard[1][1] && XOboard[0][1] == XOboard[2][1] ||
 			XOboard[0][2] == XOboard[1][2] && XOboard[0][2] == XOboard[2][2] ||
 			XOboard[0][0] == XOboard[1][1] && XOboard[0][0] == XOboard[2][2] ||
@@ -100,7 +96,6 @@ func endGame() bool {
 
 	return win
 }
-
 
 func finishGame(aiWin bool) {
 	fmt.Println("\n\tIt's a Game!")
@@ -112,7 +107,6 @@ func finishGame(aiWin bool) {
 		fmt.Println("You WIN! Congratulations!")
 	}
 }
-
 
 func playerMove(available []bool) []bool {
 	move := myPackage.GetIntFromInput("What's your move? Type number of field to put O on it!\n", 1)
@@ -129,7 +123,7 @@ func playerMove(available []bool) []bool {
 		fmt.Println("The field is unavailable. We will choose available field for you then.")
 		for i := 0; i < 9; i++ {
 			if available[i] {
-				changeXOboard(i+1, "O")
+				changeXOboard(i, "O")
 				available[i] = false
 			}
 		}
@@ -138,15 +132,13 @@ func playerMove(available []bool) []bool {
 	return available
 }
 
-
 func setPointers(available []bool) []bool {
 	for i := 0; i < 9; i++ {
-		available = append(available,true)
+		available = append(available, true)
 	}
 
 	return available
 }
-
 
 func strategyAI(available []bool) int {
 	x := string("X")
@@ -170,9 +162,9 @@ func strategyAI(available []bool) int {
 	}
 
 	/*
-			Attack moves on progress ...
+				Attack moves on progress ...
 
-	return strategyMoveAttack(available, x, o)
+		return strategyMoveAttack(available, x, o)
 
 	*/
 
@@ -180,66 +172,55 @@ func strategyAI(available []bool) int {
 	return strategyMoveRandom(available)
 }
 
-
 func strategyCheckEnd(typo string, available []bool) int {
 
 	switch {
 
-	case available[4] && (
-			XOboard[0][0] == typo && XOboard[2][2] == typo ||
-			XOboard[0][1] == typo && XOboard[2][1] == typo ||
-			XOboard[0][2] == typo && XOboard[2][0] == typo ||
-			XOboard[1][0] == typo && XOboard[1][2] == typo  ) :
+	case available[4] && (XOboard[0][0] == typo && XOboard[2][2] == typo ||
+		XOboard[0][1] == typo && XOboard[2][1] == typo ||
+		XOboard[0][2] == typo && XOboard[2][0] == typo ||
+		XOboard[1][0] == typo && XOboard[1][2] == typo):
 		return 5
 
-	case available[0] && (
-			XOboard[0][1] == typo && XOboard[0][2] == typo ||
-			XOboard[1][0] == typo && XOboard[2][0] == typo ||
-			XOboard[1][1] == typo && XOboard[2][2] == typo  ) :
+	case available[0] && (XOboard[0][1] == typo && XOboard[0][2] == typo ||
+		XOboard[1][0] == typo && XOboard[2][0] == typo ||
+		XOboard[1][1] == typo && XOboard[2][2] == typo):
 		return 1
 
-	case available[2] && (
-			XOboard[0][0] == typo && XOboard[0][1] == typo ||
-			XOboard[1][2] == typo && XOboard[2][2] == typo ||
-			XOboard[1][1] == typo && XOboard[2][0] == typo  ) :
+	case available[2] && (XOboard[0][0] == typo && XOboard[0][1] == typo ||
+		XOboard[1][2] == typo && XOboard[2][2] == typo ||
+		XOboard[1][1] == typo && XOboard[2][0] == typo):
 		return 3
 
-	case available[6] && (
-			XOboard[0][0] == typo && XOboard[1][0] == typo ||
-			XOboard[2][1] == typo && XOboard[2][2] == typo ||
-			XOboard[1][1] == typo && XOboard[0][2] == typo  ) :
+	case available[6] && (XOboard[0][0] == typo && XOboard[1][0] == typo ||
+		XOboard[2][1] == typo && XOboard[2][2] == typo ||
+		XOboard[1][1] == typo && XOboard[0][2] == typo):
 		return 7
 
-	case available[8] && (
-			XOboard[2][0] == typo && XOboard[2][1] == typo ||
-			XOboard[0][2] == typo && XOboard[1][2] == typo ||
-			XOboard[1][1] == typo && XOboard[0][0] == typo  ) :
+	case available[8] && (XOboard[2][0] == typo && XOboard[2][1] == typo ||
+		XOboard[0][2] == typo && XOboard[1][2] == typo ||
+		XOboard[1][1] == typo && XOboard[0][0] == typo):
 		return 9
 
-	case available[1] && (
-			XOboard[0][0] == typo && XOboard[0][2] == typo ||
-			XOboard[1][1] == typo && XOboard[2][1] == typo  ) :
+	case available[1] && (XOboard[0][0] == typo && XOboard[0][2] == typo ||
+		XOboard[1][1] == typo && XOboard[2][1] == typo):
 		return 2
 
-	case available[3] && (
-			XOboard[0][0] == typo && XOboard[2][0] == typo ||
-			XOboard[1][1] == typo && XOboard[1][2] == typo  ) :
+	case available[3] && (XOboard[0][0] == typo && XOboard[2][0] == typo ||
+		XOboard[1][1] == typo && XOboard[1][2] == typo):
 		return 4
 
-	case available[5] && (
-			XOboard[0][2] == typo && XOboard[2][2] == typo ||
-			XOboard[1][1] == typo && XOboard[1][0] == typo  ) :
+	case available[5] && (XOboard[0][2] == typo && XOboard[2][2] == typo ||
+		XOboard[1][1] == typo && XOboard[1][0] == typo):
 		return 6
 
-	case available[7] && (
-			XOboard[2][0] == typo && XOboard[2][2] == typo ||
-			XOboard[1][1] == typo && XOboard[0][1] == typo  ) :
+	case available[7] && (XOboard[2][0] == typo && XOboard[2][2] == typo ||
+		XOboard[1][1] == typo && XOboard[0][1] == typo):
 		return 8
 	}
 
 	return 0
 }
-
 
 func strategyMoveRandom(available []bool) int {
 	var mass []int
@@ -253,7 +234,6 @@ func strategyMoveRandom(available []bool) int {
 	return mass[myPackage.GetRandomInt(len(mass))]
 }
 
-
 func strategyStart(available []bool) bool {
 	allAvailable := true
 
@@ -266,12 +246,10 @@ func strategyStart(available []bool) bool {
 	return allAvailable
 }
 
-
 func strategyStartMove() int {
 	mass := []int{1, 3, 7, 9, 5}
 	return mass[myPackage.GetRandomInt(5)]
 }
-
 
 /*
 		ON PROGRESS - Attack moves

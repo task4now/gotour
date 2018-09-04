@@ -11,21 +11,21 @@ func splitNumberByDigits(number int) string {
 	newStr := ""
 
 	for i := 0; i < len(oldStr); i++ {
-		if i != len(oldStr) -1 {
+		if i != len(oldStr)-1 {
 			newStr += string(oldStr[i]) + ", "
 		} else {
 			newStr += string(oldStr[i]) + "."
 		}
 	}
 
-  return newStr
+	return newStr
 }
 
 func main() {
 	number := myPackage.GetIntFromInput(
 		"Please, input number to split it on digits: ",
 		9999,
-		)
+	)
 
 	digits := splitNumberByDigits(number)
 	fmt.Print("Digits are: ", digits)

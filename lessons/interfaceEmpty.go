@@ -1,17 +1,16 @@
 package main
 
 import (
-    "../myPackage"
+	"../myPackage"
 )
 
-
 func main() {
-    var i interface{}
-    myPackage.DescribeInterface(i)
+	var i interface{}
+	myPackage.DescribeInterface(i)
 
-    i = 42
-    myPackage.DescribeInterface(i)
+	i = 42
+	myPackage.DescribeInterface(i)
 
-    i = "Hello!"
-    myPackage.DescribeInterface(i)
+	i = "Hello!"
+	myPackage.DescribeInterface(i)
 }

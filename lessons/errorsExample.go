@@ -1,24 +1,22 @@
 package main
 
 import (
-    "fmt"
-    "strconv"
+	"fmt"
+	"strconv"
 )
 
-
 func main() {
-    convertStr("42")
-    convertStr("abba")
+	convertStr("42")
+	convertStr("abba")
 }
 
-
 func convertStr(str string) {
-    i, err := strconv.Atoi(str)
+	i, err := strconv.Atoi(str)
 
-    if err != nil {
-        fmt.Printf("Convert error, %v\n", err)
-        return
-    }
+	if err != nil {
+		fmt.Printf("Convert error, %v\n", err)
+		return
+	}
 
-    fmt.Println("Converted number:", i)
+	fmt.Println("Converted number:", i)
 }

@@ -1,14 +1,14 @@
 package main
 
 import (
-  	"fmt"
-  	"math/cmplx"
+	"fmt"
+	"math/cmplx"
 )
 
 var (
-  	ToBe bool
-  	MaxInt uint64 = 1<<64 - 1
-  	z = cmplx.Sqrt(-5 + 12i)
+	ToBe   bool
+	MaxInt uint64 = 1<<64 - 1
+	z             = cmplx.Sqrt(-5 + 12i)
 )
 
 func main() {

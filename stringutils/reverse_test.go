@@ -2,11 +2,10 @@ package stringutils
 
 import "testing"
 
-
 func TestReverse(t *testing.T) {
 	cases := []struct {
 		in, want string
-	} {
+	}{
 		{
 			"Hello, world",
 			"dlrow ,olleH",

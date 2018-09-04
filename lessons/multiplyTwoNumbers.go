@@ -6,13 +6,13 @@ import (
 )
 
 func multiply(x, y int) int {
-  	return x * y
+	return x * y
 }
 
 func main() {
 	numberOne := myPackage.GetIntFromInput("Please input first number: ", 1000)
 	numberTwo := myPackage.GetIntFromInput("Please input second number: ", 1000)
 
-	multi:= multiply(numberOne, numberTwo)
-  	fmt.Printf("\n\t%d * %d = %d\n", numberOne, numberTwo, multi)
+	multi := multiply(numberOne, numberTwo)
+	fmt.Printf("\n\t%d * %d = %d\n", numberOne, numberTwo, multi)
 }
